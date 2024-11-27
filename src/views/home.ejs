@@ -1,0 +1,77 @@
+<!-- Hero Section -->
+<section class="gradient-animate bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white py-32">
+    <div class="max-w-6xl mx-auto px-4">
+        <div class="text-center reveal">
+            <h1 class="text-5xl font-bold mb-6"><%= profile.name %></h1>
+            <h2 class="text-3xl mb-8"><%= profile.title %></h2>
+            <p class="text-xl max-w-2xl mx-auto leading-relaxed"><%= profile.description %></p>
+            <div class="mt-12">
+                <a href="#contact" class="contact-button bg-white text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-blue-50">
+                    Let's Connect
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Skills Section -->
+<section id="skills" class="py-24 bg-white">
+    <div class="max-w-6xl mx-auto px-4">
+        <h2 class="section-header text-3xl font-bold text-center mb-16">Skills & Expertise</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <% skills.forEach(skillGroup => { %>
+                <div class="skill-card bg-gray-50 p-8 rounded-xl reveal">
+                    <h3 class="text-xl font-semibold mb-6 text-blue-600"><%= skillGroup.category %></h3>
+                    <ul class="space-y-3">
+                        <% skillGroup.items.forEach(skill => { %>
+                            <li class="text-gray-700 flex items-center">
+                                <span class="text-blue-500 mr-2">▹</span>
+                                <%= skill %>
+                            </li>
+                        <% }) %>
+                    </ul>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</section>
+
+<!-- Projects Section -->
+<section id="projects" class="py-24 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-4">
+        <h2 class="section-header text-3xl font-bold text-center mb-16">Featured Projects</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <% projects.forEach(project => { %>
+                <div class="project-card bg-white p-8 rounded-xl reveal">
+                    <h3 class="text-2xl font-semibold mb-4 text-gray-800"><%= project.title %></h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed"><%= project.description %></p>
+                    <div class="flex flex-wrap gap-2">
+                        <% project.technologies.forEach(tech => { %>
+                            <span class="tech-tag bg-blue-100 text-blue-800 text-sm px-4 py-1 rounded-full">
+                                <%= tech %>
+                            </span>
+                        <% }) %>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="py-24 bg-white">
+    <div class="max-w-6xl mx-auto px-4">
+        <h2 class="section-header text-3xl font-bold text-center mb-16">Get In Touch</h2>
+        <div class="max-w-xl mx-auto text-center reveal">
+            <p class="text-gray-600 text-lg mb-12 leading-relaxed">
+                Interested in collaboration or have a project in mind? I'm always open to discussing new opportunities and ideas.
+            </p>
+            <div class="space-y-6">
+                <a href="mailto:santiago_mur@uao.edu.co 
+                   class="contact-button inline-block bg-blue-600 text-white px-10 py-4 rounded-full text-lg font-semibold hover:bg-blue-700">
+                    Send Me a Message
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
