@@ -40,23 +40,42 @@
 <section id="projects" class="py-24 bg-gray-50">
     <div class="max-w-6xl mx-auto px-4">
         <h2 class="section-header text-3xl font-bold text-center mb-16">Featured Projects</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <% projects.forEach(project => { %>
-                <div class="project-card bg-white p-8 rounded-xl reveal">
-                    <h3 class="text-2xl font-semibold mb-4 text-gray-800"><%= project.title %></h3>
-                    <p class="text-gray-600 mb-6 leading-relaxed"><%= project.description %></p>
-                    <div class="flex flex-wrap gap-2">
-                        <% project.technologies.forEach(tech => { %>
-                            <span class="tech-tag bg-blue-100 text-blue-800 text-sm px-4 py-1 rounded-full">
-                                <%= tech %>
-                            </span>
-                        <% }) %>
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <% projects.forEach((project, index) => { %>
+                    <div class="swiper-slide">
+                        <div class="project-card bg-white p-8 rounded-xl reveal" onclick="openModal(<%= index %>)">
+                            <h3 class="text-2xl font-semibold mb-4 text-gray-800"><%= project.title %></h3>
+                            <p class="text-gray-600 mb-6 leading-relaxed"><%= project.description %></p>
+                            <div class="flex flex-wrap gap-2">
+                                <% project.technologies.forEach(tech => { %>
+                                    <span class="tech-tag bg-blue-100 text-blue-800 text-sm px-4 py-1 rounded-full">
+                                        <%= tech %>
+                                    </span>
+                                <% }) %>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            <% }) %>
+                <% }) %>
+            </div>
+            <!-- Swiper Navigation Buttons -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
         </div>
     </div>
 </section>
+
+
+<!-- Modal -->
+<div id="projectModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
+    <div class="bg-white p-8 rounded-lg max-w-3xl w-full relative">
+        <button class="absolute top-2 right-2 text-gray-500 hover:text-gray-700" onclick="closeModal()">✖</button>
+        <div id="modalContent">
+            <!-- Content will be injected here dynamically -->
+        </div>
+    </div>
+</div>
+
 
 <!-- Contact Section -->
 <section id="contact" class="py-24 bg-white">
@@ -75,3 +94,51 @@
         </div>
     </div>
 </section>
+
+<!-- Swiper.js CSS -->
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+<!-- Swiper.js JS -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+<script>
+    // Initialize Swiper
+    const swiper = new Swiper('#projects .swiper-container', {
+    slidesPerView: 1,
+    spaceBetween: 20,
+    navigation: {
+        nextEl: '#projects .swiper-button-next',
+        prevEl: '#projects .swiper-button-prev',
+    },
+    breakpoints: {
+        640: { slidesPerView: 1 },
+        768: { slidesPerView: 2 },
+        1024: { slidesPerView: 3 },
+    },
+});
+
+
+    // Modal Logic
+    const modal = document.getElementById('projectModal');
+    const modalContent = document.getElementById('modalContent');
+
+    function openModal(index) {
+        const project = <%- JSON.stringify(projects) %>[index];
+        modalContent.innerHTML = `
+            <h3 class="text-2xl font-bold mb-4">${project.title}</h3>
+            <p class="text-gray-600 mb-4">${project.description}</p>
+            <div class="grid grid-cols-2 gap-4">
+                ${project.technologies.map(tech => `
+                    <span class="tech-tag bg-blue-100 text-blue-800 text-sm px-4 py-1 rounded-full">
+                        ${tech}
+                    </span>
+                `).join('')}
+            </div>
+        `;
+        modal.classList.remove('hidden');
+    }
+
+    function closeModal() {
+        modal.classList.add('hidden');
+        modalContent.innerHTML = '';
+    }
+</script>
