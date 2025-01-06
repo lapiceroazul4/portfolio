@@ -162,29 +162,27 @@ nav a:hover::after {
     background: #1d4ed8;
 }
 
-/* Swiper carousel styles */
-
-#projects .swiper-container {
+.swiper-container {
     width: 100%;
     height: 100%;
 }
 
-#projects .swiper-slide {
+.swiper-slide {
     display: flex;
     justify-content: center;
     align-items: center;
     width: auto; /* Ajusta el ancho automáticamente */
 }
 
-#projects .swiper-button-next, .swiper-button-prev {
+.swiper-button-next, .swiper-button-prev {
     color: #2563EB; /* Asegúrate de que los botones sean visibles */
 }
 
-#project Modal {
+#projectModal {
     z-index: 50; /* Asegúrate de que el modal está encima de otros elementos */
 }
 
-#projects .swiper-container {
+#projects.swiper-container {
     z-index: 5; /* El carrusel debe estar debajo del modal */
 }
 
